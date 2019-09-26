@@ -9,14 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeroesComponent implements OnInit {
 
-  // hero: Hero = {
-  //   id: 1,
-  //   name: 'Zeno'
-  // };
-
   heroes: Hero[];
-
-  selectedHero: Hero;
 
   constructor( private heroService: HeroService ) { }
 
@@ -25,13 +18,8 @@ export class HeroesComponent implements OnInit {
   }
 
   getHeroes(): void {
-    // this.heroes = this.heroService.getHeroes();
     this.heroService.getHeroes()
         .subscribe(heroes => this.heroes = heroes);
   }
-
-  // onSelect(hero: Hero): void {
-  //   this.selectedHero = hero;
-  // }
 
 }
