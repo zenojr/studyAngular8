@@ -36,6 +36,16 @@ export class HeroService {
   }
 
 
+  searchHeroes( term: string ): Observable<Hero[]> {
+    if (!term.trim()) {
+      return of([]);
+    }
+    return this.http.get<Hero[]>(`${this.heroesUrl}/?name=${term}`).pipe(
+      tap( _ => this.log(`found heroes " ${term} "`)),
+      catchError(this.handleError<Hero[]>('searchHeroes', []))
+    );
+  }
+
   deleteHero(hero: Hero | number): Observable<Hero> {
     const id = typeof hero === 'number' ? hero : hero.id;
     const url = `${this.heroesUrl}/${id}`;
